@@ -1,0 +1,22 @@
+/* src/components/Navbar/Navbar.css */
+
+.navbar-toolbar {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-logo span {
+  margin-left: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.navbar-links > * {
+  margin-left: 12px;
+}
