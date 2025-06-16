@@ -8,9 +8,12 @@ import Home from './pages/Home/Home';
 import AddProduct from './pages/AddProduct/AddProduct';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import Order from './pages/Order/Order'; // Import the new Order component
+import ModifyProduct from './pages/ModifyProduct/ModifyProduct'; // Import ModifyProduct
+
+
 
 export default function App() {
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [token, setToken] = useState("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcnZpbmRoc2lkMjAwMEBnbWFpbC5jb20iLCJpYXQiOjE3NTAwNjg1OTMsImV4cCI6MTc1MDA3Njk5M30.NE7FU6ix54UNcK5Bzj323i2dilViQY8NEozbvBVomRNeFlQSQr6kWy1wl4l_VYjuq_RSwkZ8j4GcgaN-8HQJsA");
   const [role, setRole] = useState(localStorage.getItem('role') || ''); // Using role state as per your original App.js
   const [searchQuery, setSearchQuery] = useState(''); // Added for search functionality
 
@@ -18,26 +21,26 @@ export default function App() {
     // This useEffect is typically used for side effects,
     // such as initial data fetching or authentication checks on component mount.
     // For this example, we trust localStorage.
-  }, []);
+  }, []); //
 
   const handleLogin = (tok, rol) => { // Using tok, rol parameters as per your original App.js
-    localStorage.setItem('token', tok);
-    localStorage.setItem('role', rol);
-    setToken(tok);
-    setRole(rol);
+    localStorage.setItem('token', tok); //
+    localStorage.setItem('role', rol); //
+    setToken(tok); //
+    setRole(rol); //
   };
 
-  const handleLogout = () => {
+  const handleLogout = () => { //
     localStorage.clear(); // Using localStorage.clear() as per your original App.js
-    setToken('');
-    setRole('');
+    setToken(''); //
+    setRole(''); //
     setSearchQuery(''); // Clear search query on logout
   };
 
   const isAdmin = role === 'ADMIN'; // Deriving isAdmin from role as per your original App.js
 
   const handleSearchProducts = (query) => { // Handler for search functionality
-    setSearchQuery(query);
+    setSearchQuery(query); //
   };
 
   return (
@@ -54,8 +57,8 @@ export default function App() {
           path="/login"
           element={
             token
-              ? <Navigate to="/" replace />
-              : <Login onLogin={handleLogin} />
+              ? <Navigate to="/" replace /> //
+              : <Login onLogin={handleLogin} /> //
           }
         />
 
@@ -64,8 +67,8 @@ export default function App() {
           path="/signup"
           element={
             token
-              ? <Navigate to="/" replace />
-              : <Signup />
+              ? <Navigate to="/" replace /> //
+              : <Signup /> //
           }
         />
 
@@ -75,7 +78,7 @@ export default function App() {
           element={
             token
               ? <Home token={token} isAdmin={isAdmin} searchQuery={searchQuery} /> // Pass searchQuery to Home
-              : <Navigate to="/login" replace />
+              : <Navigate to="/login" replace /> //
           }
         />
 
@@ -84,8 +87,8 @@ export default function App() {
           path="/add-product"
           element={
             isAdmin
-              ? <AddProduct token={token} />
-              : <Navigate to="/" replace />
+              ? <AddProduct token={token} /> //
+              : <Navigate to="/" replace /> //
           }
         />
 
@@ -94,8 +97,8 @@ export default function App() {
           path="/product/:id"
           element={
             token
-              ? <ProductDetails token={token} />
-              : <Navigate to="/login" replace />
+              ? <ProductDetails token={token} /> //
+              : <Navigate to="/login" replace /> //
           }
         />
 
@@ -104,8 +107,18 @@ export default function App() {
           path="/order/:id"
           element={
             token
-              ? <Order token={token} />
-              : <Navigate to="/login" replace />
+              ? <Order token={token} /> //
+              : <Navigate to="/login" replace /> //
+          }
+        />
+
+        {/* MODIFY PRODUCT (Admin only) - NEW ROUTE ADDED HERE */}
+        <Route
+          path="/modify-product/:id" // Define the path with a parameter for product ID
+          element={
+            isAdmin // Assuming this route should also be admin-only based on project requirements
+              ? <ModifyProduct token={token} />
+              : <Navigate to="/" replace />
           }
         />
       </Routes>
