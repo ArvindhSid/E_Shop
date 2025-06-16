@@ -104,11 +104,17 @@ export default function ProductDetails({ token }) {
 
             <Button
               variant="contained"
-              onClick={handlePlaceOrderClick} // Changed from handleOrder
+              onClick={handlePlaceOrderClick}
               disabled={qty < 1 || qty > product.availableItems || !token}
+              sx={{
+                backgroundColor: '#3f51b5',
+                '&:hover': { backgroundColor: '#303f9f' },
+                textTransform: 'none'
+              }}
             >
               PLACE ORDER
             </Button>
+
           </Box>
           {orderError && (
             <Typography color="error" sx={{ mt: 1 }}>

@@ -331,15 +331,9 @@ export default function Order({ token }) {
         {activeStep === steps.length - 1 ? (
           <Button
             variant="contained"
+            color="primary"
             onClick={handlePlaceOrder}
-            sx={{
-              backgroundColor: '#3f51b5',
-              color: '#fff',
-              textTransform: 'none',
-              '&:hover': {
-                backgroundColor: '#303f9f',
-              }
-            }}
+            sx={{ textTransform: 'none' }}
           >
             Place Order
           </Button>
